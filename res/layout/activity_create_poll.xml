@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_weight="3"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:background="#E5E5E5"
+        android:padding="2dp"
+        android:orientation="vertical" >
+        
+        <ImageView 
+            android:src="@drawable/question_mark"
+            android:layout_weight="1"
+        	android:layout_width="match_parent"
+        	android:layout_height="0dp" />
+        
+        <TextView 
+            android:layout_weight="3"
+            android:id="@+id/poll_question"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:textAlignment="center"
+        	android:background="#FFFFFF" />
+        
+        <View
+            android:layout_weight="1"
+        	android:layout_width="match_parent"
+        	android:layout_height="0dp" />
+        
+    </LinearLayout>
+        
+    <Gallery
+        android:layout_weight="5"
+        android:layout_height="0dp"
+        android:layout_width="match_parent" >
+        
+        
+        
+    </Gallery>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" >
+        
+        <ImageView 
+            android:layout_weight="1"
+        	android:layout_height="wrap_content"
+        	android:layout_width="0dp"
+        	android:layout_gravity="center"
+            android:src="@drawable/broadcast"/>
+        
+        <ToggleButton 
+		    android:id="@+id/togglebutton"
+    		android:textOn="Allow Invite"
+		    android:textOff="Block Invite"
+		    android:onClick="onToggleClicked" 
+            android:layout_weight="1"
+        	android:layout_height="wrap_content"
+        	android:layout_width="0dp"
+        	android:layout_gravity="center" />
+        
+        <ImageView 
+            android:layout_weight="1"
+        	android:layout_height="wrap_content"
+        	android:layout_width="0dp"
+        	android:layout_gravity="center"
+            android:src="@drawable/submit"
+            android:onClick="createGroup" />
+        
+    </LinearLayout>
+        
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:background="#E5E5E5" >
+        
+        <ImageView 
+		    android:src="@drawable/attach"
+        	android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center" />
+        <ImageView 
+		    android:src="@drawable/camera"
+        	android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center" />
+        <EditText
+            android:id="@+id/poll_text"
+        	android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_gravity="center" />
+        <ImageView 
+		    android:src="@drawable/smiley"
+		    android:onClick="postComment"
+        	android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center" />
+        <ImageView 
+		    android:src="@drawable/audio_mic"
+        	android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center" />
+        
+    </LinearLayout>
+    
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+ 
+    <CheckBox
+        android:id="@+id/check_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="5px" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <TextView
+        android:id="@+id/group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30px"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="5px" />
+    
+	    <TextView
+	        android:layout_below="@id/group_name"
+        android:id="@+id/group_members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/group_memebers"
+        android:textSize="10px" >
+    
+    </TextView>
+        
+    </RelativeLayout>
+ 
+</LinearLayout>

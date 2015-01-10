@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">mynit</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="mynit_with_your_number">mynit with your number</string>
+    <string name="country_code">+91 India</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="action_settings">Settings</string>
+    <string name="invalid_country_code">Please enter a valid country code</string>
+    <string name="invalid_phone_number">Please enter a valid phone number</string>
+    <string name="confirm_your_number">Confirm Your Number</string>
+    <string name="enter_OTP">We sent you a sms pin\nEnter Below</string>
+    <string name="invalid_OTP">The OTP entered by you does not match the one we sent you</string>
+    <string name="title_activity_home">Home</string>
+    <string name="click_share_opinion">Click to Share your Opinion</string>
+    <string name="vote_anonymous">(Your Vote is Anonymous)</string>
+    <string name="survey_enabled">survey is enabled</string>
+    <string name="survey_disabled">survey is disabled</string>
+    <string name="less_than">previous</string>
+    <string name="create_new">Create New</string>
+    <string name="add_photo">ADD\nPHOTO</string>
+    <string name="use_existing">Use Existing</string>
+    <string name="add_friends">ADD FRIENDS</string>
+    <string name="group_name_hint">GROUP NAME:</string>
+    <string name="greater_than">next</string>
+    <string name="title_activity_unanswered_survey">Unanswered Survey</string>
+    <string name="title_activity_answered_survey">Answered Survey</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="maybe">MAYBE</string>
+    <string name="share">Share Survey</string>
+    <string name="create_poll">Create Poll</string>
+    <string name="invite">Invite others to join this survey</string>
+    <string name="title_activity_create_poll">Create Poll</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_contacts">Contacts</string>
+    <string name="title_activity_mynhome">MYN Home</string>
+
+</resources>

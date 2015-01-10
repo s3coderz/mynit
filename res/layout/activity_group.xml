@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/create_new"
+        android:background="#E5E5E5"
+        android:gravity="center" />
+    
+    <Button 
+    	android:onClick="addPhoto"
+        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/shapes_yes_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#FFFFFF"
+        android:text="@string/add_photo"
+        android:layout_gravity="center" />
+    
+    <EditText
+        android:id="@+id/group_name"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="@string/group_name_hint" />
+    
+    <LinearLayout 
+        android:background="#E5E5E5"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+        
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_friends"
+        android:gravity="center" />
+        
+        <Button 
+    	android:onClick="addFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shapes_yes_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#FFFFFF"
+        android:text="+"
+        android:layout_gravity="center" />
+        
+    </LinearLayout>
+    
+    <TextView
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/use_existing"
+        android:background="#E5E5E5"
+        android:gravity="center" />
+    
+    <ListView android:id="@android:id/list"
+    android:layout_width="match_parent" 
+    android:layout_height="0dp"
+    android:layout_weight="4"/>
+    
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#E5E5E5"
+        android:orientation="horizontal" >
+        
+        <Button
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:onClick="cancelSurvey" />
+        
+        <Button
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:onClick="createSurvey" />
+    
+    </LinearLayout>
+    
+</LinearLayout>

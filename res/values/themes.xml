@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity -->
+    <style name="MynitCustomActionBarTheme"
+           parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MynitActionBar</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MynitActionBar"
+           parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#D93333</item>
+    </style>
+</resources>
