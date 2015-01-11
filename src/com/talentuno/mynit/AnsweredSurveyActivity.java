@@ -286,7 +286,7 @@ public class AnsweredSurveyActivity extends Activity {
 		c.date = e.get("date").getAsString();
 		try {
 		Date d = new Date( Long.parseLong(c.date) );
-		ArrayList<String> months = new ArrayList<>(Arrays.asList(new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}));
+		ArrayList<String> months = new ArrayList<String>(Arrays.asList(new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}));
 		c.date = d.getDate() + " " + months.get(d.getMonth()) + " " + (1900 + d.getYear());
 		}
 		catch( NumberFormatException ex ) {}
@@ -348,7 +348,7 @@ public class AnsweredSurveyActivity extends Activity {
 		Intent intent = new Intent(this, AnsweredSurveyActivity.class);
 		intent.putExtra(SID, sid);
 		startActivity(intent);
-		overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+//		overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 		finish();
 		
 	}

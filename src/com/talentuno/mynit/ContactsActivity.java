@@ -39,7 +39,7 @@ public class ContactsActivity extends ListActivity {
             if(! contacts.containsKey(name)) contacts.put(name, phoneNumber);
         }
 
-        SELECTED_NUMBERS = new HashMap<>();
+        SELECTED_NUMBERS = new HashMap<String, String>();
         
         final String[] CONTACTS = contacts.keySet().toArray( new String[]{} );
         Arrays.sort(CONTACTS);

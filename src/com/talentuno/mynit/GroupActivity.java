@@ -53,7 +53,7 @@ public class GroupActivity extends Activity {
 		
 		SharedPreferences dataStore = getSharedPreferences(DATA_STORE, MODE_PRIVATE);
 		String groupList = dataStore.getString( "groups" , null );
-		groups = new HashMap<>();
+		groups = new HashMap<String,String>();
 		if( groupList != null ) {
 			
 			for( String s : groupList.split( "," ) ) {
@@ -82,8 +82,8 @@ public class GroupActivity extends Activity {
 //		      }
 //		});
 		
-		SELECTED_GROUPS = new HashMap<>();
-        ArrayList<String> temp = new ArrayList<>();
+		SELECTED_GROUPS = new HashMap<String,String>();
+        ArrayList<String> temp = new ArrayList<String>();
         for( String s : groups.keySet() )
         	temp.add( s + ":" + groups.get(s) );
         final String[] GROUPS = temp.toArray( new String[]{} );

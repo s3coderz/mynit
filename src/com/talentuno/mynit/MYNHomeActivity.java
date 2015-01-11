@@ -35,7 +35,7 @@ import android.widget.Toast;
 public class MYNHomeActivity extends ListActivity {
 
     static final String SID = "com.talentuno.mynit";
-    static ArrayList<Survey> SURVEYS = new ArrayList<>();
+    static ArrayList<Survey> SURVEYS = new ArrayList<Survey>();
 
     @Override
 	public void onResume() {
@@ -67,7 +67,7 @@ public class MYNHomeActivity extends ListActivity {
 			
 		}
 		
-		ArrayList<String> sidList = new ArrayList<>();
+		ArrayList<String> sidList = new ArrayList<String>();
 		
 		JsonArray sids = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" );
 		Log.d( "com.talentuno.mynit" , "comments:" + sids );
