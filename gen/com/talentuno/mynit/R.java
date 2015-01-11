@@ -10,6 +10,10 @@ package com.talentuno.mynit;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int button_red=0x7f040000;
+        public static final int button_red_hover=0x7f040001;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -18,124 +22,135 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int action_bar=0x7f020000;
         public static final int attach=0x7f020001;
         public static final int audio_mic=0x7f020002;
-        public static final int broadcast=0x7f020003;
-        public static final int btn=0x7f020004;
-        public static final int camera=0x7f020005;
-        public static final int cell_phone=0x7f020006;
-        public static final int create_poll=0x7f020007;
-        public static final int globe_logo=0x7f020008;
-        public static final int greater_than=0x7f020009;
-        public static final int green_enabled=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int invite=0x7f02000c;
-        public static final int less_than=0x7f02000d;
-        public static final int may_be=0x7f02000e;
-        public static final int no=0x7f02000f;
-        public static final int profile_pic=0x7f020010;
-        public static final int question_mark=0x7f020011;
-        public static final int red_disabled=0x7f020012;
-        public static final int send=0x7f020013;
-        public static final int shapes_maybe_button=0x7f020014;
-        public static final int shapes_no_button=0x7f020015;
-        public static final int shapes_yes_button=0x7f020016;
-        public static final int share=0x7f020017;
-        public static final int smiley=0x7f020018;
-        public static final int start_button=0x7f020019;
-        public static final int submit=0x7f02001a;
-        public static final int survey_taken=0x7f02001b;
-        public static final int yes=0x7f02001c;
+        public static final int bg=0x7f020003;
+        public static final int broadcast=0x7f020004;
+        public static final int btn=0x7f020005;
+        public static final int camera=0x7f020006;
+        public static final int cell_phone=0x7f020007;
+        public static final int create_poll=0x7f020008;
+        public static final int globe_logo=0x7f020009;
+        public static final int greater_than=0x7f02000a;
+        public static final int green_enabled=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int invite=0x7f02000d;
+        public static final int less_than=0x7f02000e;
+        public static final int login_button_selector=0x7f02000f;
+        public static final int logo=0x7f020010;
+        public static final int may_be=0x7f020011;
+        public static final int no=0x7f020012;
+        public static final int phone_icon=0x7f020013;
+        public static final int place_icon=0x7f020014;
+        public static final int profile_pic=0x7f020015;
+        public static final int question_mark=0x7f020016;
+        public static final int red_disabled=0x7f020017;
+        public static final int send=0x7f020018;
+        public static final int shapes_maybe_button=0x7f020019;
+        public static final int shapes_no_button=0x7f02001a;
+        public static final int shapes_yes_button=0x7f02001b;
+        public static final int share=0x7f02001c;
+        public static final int smiley=0x7f02001d;
+        public static final int start_button=0x7f02001e;
+        public static final int submit=0x7f02001f;
+        public static final int survey_taken=0x7f020020;
+        public static final int yes=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f080052;
-        public static final int ans_survey_text=0x7f080000;
-        public static final int chatWindow=0x7f080005;
-        public static final int check=0x7f080043;
-        public static final int check_group=0x7f080047;
-        public static final int comLay1=0x7f080006;
-        public static final int comLay10=0x7f080033;
-        public static final int comLay2=0x7f08000b;
-        public static final int comLay3=0x7f080010;
-        public static final int comLay4=0x7f080015;
-        public static final int comLay5=0x7f08001a;
-        public static final int comLay6=0x7f08001f;
-        public static final int comLay7=0x7f080024;
-        public static final int comLay8=0x7f080029;
-        public static final int comLay9=0x7f08002e;
-        public static final int comment1=0x7f080009;
-        public static final int comment10=0x7f080036;
-        public static final int comment2=0x7f08000e;
-        public static final int comment3=0x7f080013;
-        public static final int comment4=0x7f080018;
-        public static final int comment5=0x7f08001d;
-        public static final int comment6=0x7f080022;
-        public static final int comment7=0x7f080027;
-        public static final int comment8=0x7f08002c;
-        public static final int comment9=0x7f080031;
-        public static final int commentText=0x7f080038;
-        public static final int comments=0x7f080050;
-        public static final int container=0x7f080039;
-        public static final int countryCode=0x7f080045;
-        public static final int create_poll=0x7f080051;
-        public static final int date1=0x7f08000a;
-        public static final int date10=0x7f080037;
-        public static final int date2=0x7f08000f;
-        public static final int date3=0x7f080014;
-        public static final int date4=0x7f080019;
-        public static final int date5=0x7f08001e;
-        public static final int date6=0x7f080023;
-        public static final int date7=0x7f080028;
-        public static final int date8=0x7f08002d;
-        public static final int date9=0x7f080032;
-        public static final int disabled_survey=0x7f08004b;
-        public static final int enabled_survey=0x7f08004a;
-        public static final int group_members=0x7f080048;
-        public static final int group_memebers=0x7f080049;
-        public static final int group_name=0x7f08003d;
-        public static final int label=0x7f080044;
-        public static final int line1=0x7f080008;
-        public static final int line10=0x7f080035;
-        public static final int line2=0x7f08000d;
-        public static final int line3=0x7f080012;
-        public static final int line4=0x7f080017;
-        public static final int line5=0x7f08001c;
-        public static final int line6=0x7f080021;
-        public static final int line7=0x7f080026;
-        public static final int line8=0x7f08002b;
-        public static final int line9=0x7f080030;
-        public static final int maybe_count=0x7f080004;
-        public static final int name1=0x7f080007;
-        public static final int name10=0x7f080034;
-        public static final int name2=0x7f08000c;
-        public static final int name3=0x7f080011;
-        public static final int name4=0x7f080016;
-        public static final int name5=0x7f08001b;
-        public static final int name6=0x7f080020;
-        public static final int name7=0x7f080025;
-        public static final int name8=0x7f08002a;
-        public static final int name9=0x7f08002f;
-        public static final int no_count=0x7f080003;
-        public static final int numResponses=0x7f080001;
-        public static final int phoneNumber=0x7f080046;
-        public static final int poll_question=0x7f08003a;
-        public static final int poll_text=0x7f08003c;
-        public static final int profile_pic=0x7f08004e;
-        public static final int rel=0x7f080041;
-        public static final int requested_by=0x7f08004f;
-        public static final int survey_disabled=0x7f080040;
-        public static final int survey_enabled=0x7f08003f;
-        public static final int survey_taken=0x7f08004c;
-        public static final int survey_text=0x7f08003e;
-        public static final int survey_text_unanswered=0x7f080042;
-        public static final int togglebutton=0x7f08003b;
-        public static final int visit_survey=0x7f08004d;
-        public static final int yes_count=0x7f080002;
+        public static final int action_settings=0x7f090058;
+        public static final int ans_survey_text=0x7f090000;
+        public static final int chatWindow=0x7f090005;
+        public static final int check=0x7f090043;
+        public static final int check_group=0x7f090047;
+        public static final int comLay1=0x7f090006;
+        public static final int comLay10=0x7f090033;
+        public static final int comLay2=0x7f09000b;
+        public static final int comLay3=0x7f090010;
+        public static final int comLay4=0x7f090015;
+        public static final int comLay5=0x7f09001a;
+        public static final int comLay6=0x7f09001f;
+        public static final int comLay7=0x7f090024;
+        public static final int comLay8=0x7f090029;
+        public static final int comLay9=0x7f09002e;
+        public static final int comment1=0x7f090009;
+        public static final int comment10=0x7f090036;
+        public static final int comment2=0x7f09000e;
+        public static final int comment3=0x7f090013;
+        public static final int comment4=0x7f090018;
+        public static final int comment5=0x7f09001d;
+        public static final int comment6=0x7f090022;
+        public static final int comment7=0x7f090027;
+        public static final int comment8=0x7f09002c;
+        public static final int comment9=0x7f090031;
+        public static final int commentText=0x7f090038;
+        public static final int comments=0x7f090056;
+        public static final int container=0x7f090039;
+        public static final int countryCode=0x7f090045;
+        public static final int create_poll=0x7f090057;
+        public static final int date1=0x7f09000a;
+        public static final int date10=0x7f090037;
+        public static final int date2=0x7f09000f;
+        public static final int date3=0x7f090014;
+        public static final int date4=0x7f090019;
+        public static final int date5=0x7f09001e;
+        public static final int date6=0x7f090023;
+        public static final int date7=0x7f090028;
+        public static final int date8=0x7f09002d;
+        public static final int date9=0x7f090032;
+        public static final int disabled_survey=0x7f090051;
+        public static final int editText1=0x7f09004d;
+        public static final int enabled_survey=0x7f090050;
+        public static final int group_members=0x7f090048;
+        public static final int group_memebers=0x7f090049;
+        public static final int group_name=0x7f09003d;
+        public static final int imageView1=0x7f09004a;
+        public static final int label=0x7f090044;
+        public static final int line1=0x7f090008;
+        public static final int line10=0x7f090035;
+        public static final int line2=0x7f09000d;
+        public static final int line3=0x7f090012;
+        public static final int line4=0x7f090017;
+        public static final int line5=0x7f09001c;
+        public static final int line6=0x7f090021;
+        public static final int line7=0x7f090026;
+        public static final int line8=0x7f09002b;
+        public static final int line9=0x7f090030;
+        public static final int maybe_count=0x7f090004;
+        public static final int name1=0x7f090007;
+        public static final int name10=0x7f090034;
+        public static final int name2=0x7f09000c;
+        public static final int name3=0x7f090011;
+        public static final int name4=0x7f090016;
+        public static final int name5=0x7f09001b;
+        public static final int name6=0x7f090020;
+        public static final int name7=0x7f090025;
+        public static final int name8=0x7f09002a;
+        public static final int name9=0x7f09002f;
+        public static final int no_count=0x7f090003;
+        public static final int numResponses=0x7f090001;
+        public static final int phoneNumber=0x7f090046;
+        public static final int poll_question=0x7f09003a;
+        public static final int poll_text=0x7f09003c;
+        public static final int profile_pic=0x7f090054;
+        public static final int rel=0x7f090041;
+        public static final int requested_by=0x7f090055;
+        public static final int survey_disabled=0x7f090040;
+        public static final int survey_enabled=0x7f09003f;
+        public static final int survey_taken=0x7f090052;
+        public static final int survey_text=0x7f09003e;
+        public static final int survey_text_unanswered=0x7f090042;
+        public static final int tableRow1=0x7f09004b;
+        public static final int tableRow2=0x7f09004c;
+        public static final int tableRow3=0x7f09004e;
+        public static final int tableRow4=0x7f09004f;
+        public static final int togglebutton=0x7f09003b;
+        public static final int visit_survey=0x7f090053;
+        public static final int yes_count=0x7f090002;
     }
     public static final class layout {
         public static final int activity_answered_survey=0x7f030000;
@@ -157,56 +172,57 @@ public final class R {
         public static final int fragment_mynhome=0x7f030010;
         public static final int fragment_unanswered_survey=0x7f030011;
         public static final int group_list=0x7f030012;
-        public static final int survey_list=0x7f030013;
+        public static final int new_activity_login=0x7f030013;
+        public static final int survey_list=0x7f030014;
     }
     public static final class menu {
-        public static final int answered_survey=0x7f070000;
-        public static final int contacts=0x7f070001;
-        public static final int create_poll=0x7f070002;
-        public static final int group=0x7f070003;
-        public static final int home=0x7f070004;
-        public static final int login=0x7f070005;
-        public static final int mynhome=0x7f070006;
-        public static final int unanswered_survey=0x7f070007;
+        public static final int answered_survey=0x7f080000;
+        public static final int contacts=0x7f080001;
+        public static final int create_poll=0x7f080002;
+        public static final int group=0x7f080003;
+        public static final int home=0x7f080004;
+        public static final int login=0x7f080005;
+        public static final int mynhome=0x7f080006;
+        public static final int unanswered_survey=0x7f080007;
     }
     public static final class string {
-        public static final int action_settings=0x7f050007;
-        public static final int add_friends=0x7f050016;
-        public static final int add_photo=0x7f050014;
-        public static final int app_name=0x7f050000;
-        public static final int cancel=0x7f050005;
-        public static final int click_share_opinion=0x7f05000e;
-        public static final int confirm=0x7f050006;
-        public static final int confirm_your_number=0x7f05000a;
-        public static final int country_code=0x7f050003;
-        public static final int create_new=0x7f050013;
-        public static final int create_poll=0x7f05001f;
-        public static final int enter_OTP=0x7f05000b;
-        public static final int greater_than=0x7f050018;
-        public static final int group_name_hint=0x7f050017;
-        public static final int hello_world=0x7f050001;
-        public static final int invalid_OTP=0x7f05000c;
-        public static final int invalid_country_code=0x7f050008;
-        public static final int invalid_phone_number=0x7f050009;
-        public static final int invite=0x7f050020;
-        public static final int less_than=0x7f050012;
-        public static final int maybe=0x7f05001d;
-        public static final int mynit_with_your_number=0x7f050002;
-        public static final int no=0x7f05001c;
-        public static final int phone_number=0x7f050004;
-        public static final int share=0x7f05001e;
-        public static final int survey_disabled=0x7f050011;
-        public static final int survey_enabled=0x7f050010;
-        public static final int title_activity_answered_survey=0x7f05001a;
-        public static final int title_activity_contacts=0x7f050023;
-        public static final int title_activity_create_poll=0x7f050021;
-        public static final int title_activity_group=0x7f050022;
-        public static final int title_activity_home=0x7f05000d;
-        public static final int title_activity_mynhome=0x7f050024;
-        public static final int title_activity_unanswered_survey=0x7f050019;
-        public static final int use_existing=0x7f050015;
-        public static final int vote_anonymous=0x7f05000f;
-        public static final int yes=0x7f05001b;
+        public static final int action_settings=0x7f060007;
+        public static final int add_friends=0x7f060016;
+        public static final int add_photo=0x7f060014;
+        public static final int app_name=0x7f060000;
+        public static final int cancel=0x7f060005;
+        public static final int click_share_opinion=0x7f06000e;
+        public static final int confirm=0x7f060006;
+        public static final int confirm_your_number=0x7f06000a;
+        public static final int country_code=0x7f060003;
+        public static final int create_new=0x7f060013;
+        public static final int create_poll=0x7f06001f;
+        public static final int enter_OTP=0x7f06000b;
+        public static final int greater_than=0x7f060018;
+        public static final int group_name_hint=0x7f060017;
+        public static final int hello_world=0x7f060001;
+        public static final int invalid_OTP=0x7f06000c;
+        public static final int invalid_country_code=0x7f060008;
+        public static final int invalid_phone_number=0x7f060009;
+        public static final int invite=0x7f060020;
+        public static final int less_than=0x7f060012;
+        public static final int maybe=0x7f06001d;
+        public static final int mynit_with_your_number=0x7f060002;
+        public static final int no=0x7f06001c;
+        public static final int phone_number=0x7f060004;
+        public static final int share=0x7f06001e;
+        public static final int survey_disabled=0x7f060011;
+        public static final int survey_enabled=0x7f060010;
+        public static final int title_activity_answered_survey=0x7f06001a;
+        public static final int title_activity_contacts=0x7f060023;
+        public static final int title_activity_create_poll=0x7f060021;
+        public static final int title_activity_group=0x7f060022;
+        public static final int title_activity_home=0x7f06000d;
+        public static final int title_activity_mynhome=0x7f060024;
+        public static final int title_activity_unanswered_survey=0x7f060019;
+        public static final int use_existing=0x7f060015;
+        public static final int vote_anonymous=0x7f06000f;
+        public static final int yes=0x7f06001b;
     }
     public static final class style {
         /** 
@@ -230,16 +246,16 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
         /**  ActionBar styles 
          */
-        public static final int MynitActionBar=0x7f060003;
+        public static final int MynitActionBar=0x7f070003;
         /**  the theme applied to the application or activity 
          */
-        public static final int MynitCustomActionBarTheme=0x7f060002;
+        public static final int MynitCustomActionBarTheme=0x7f070002;
     }
 }

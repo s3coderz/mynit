@@ -24,12 +24,6 @@ public class DatabaseQuery extends AsyncTask<String, String, String> {
 	public static String result;
 	private ProgressDialog dialog;
 	private Context callerContext;
-	testinterface testInterface;
-	public DatabaseQuery(testinterface testInterface) {
-	this.testInterface = testInterface;
-	}
-	
-	
 
 	@Override
 	protected void onPreExecute() {
@@ -141,6 +135,5 @@ public class DatabaseQuery extends AsyncTask<String, String, String> {
 		super.onPostExecute(result);
 		Log.d("com.talentuno.mynit", "Received:" + result);
 		dialog.dismiss();
-		testInterface.test(result);
 	}
 }
