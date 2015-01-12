@@ -20,28 +20,36 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class QueryServer extends AsyncTask<Void, Void, String> {
+	
+	public enum Action {
+		
+		CREATE_USER,
+		GET_USER,
+		REQUEST_OTP
+		
+	}
 
 	String cypherQuery = "";
 	ResultHandler caller;
 	Object[] params;
-	String action = "";
+	Action action;
 
-	public QueryServer(ResultHandler caller, String action, String... params) {
+	public QueryServer(ResultHandler caller, Action action, String... params) {
 		this.caller = caller;
 		this.action = action;
 		this.params = params;
 		
 		switch( action ) {
 		
-		case "createUser":
+		case CREATE_USER:
 			cypherQuery = User.createUser(params[0],params[1],params[2],params[3],params[4]);
 			break;
 			
-		case "getUser":
+		case GET_USER:
 			cypherQuery = User.getUser(params[0]);
 			break;
 			
-		case "requestOTP":
+		case REQUEST_OTP:
 			cypherQuery = User.requestOTP(params[0],params[1]);
 			break;
 			
@@ -86,11 +94,11 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 		
 		switch( action ) {
 		
-		case "createUser":
+		case CREATE_USER:
 			caller.onSuccess("");
 			break;
 			
-		case "getUser":
+		case GET_USER:
 			String name = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("name").getAsString();
 			String uid = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("uid").getAsString();
 			String phNumber = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("phNumber").getAsString();
@@ -99,7 +107,7 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			caller.onSuccess( new User(name, uid, dpId, phNumber, email));
 			break;
 			
-		case "requestOTP":
+		case REQUEST_OTP:
 			caller.onSuccess("");
 			break;
 			
