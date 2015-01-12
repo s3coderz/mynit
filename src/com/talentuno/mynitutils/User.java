@@ -45,5 +45,16 @@ public class User {
 		return "{\"statements\":[{\"statement\":\"CREATE (otp:PendingOTP{props}) RETURN id(otp)\",\"parameters\":{\"props\":{\"number\":\""+number+"\"}}}]}";
 		
 	}
+
+	public static  String verifyOTP( String countryCode , String phNumber , String OTP ) {
+		
+		String number = countryCode + phNumber;
+		number = number.replaceAll( "\\+" , "" );
+		number = number.replaceAll( "\\-" , "" );
+		number = number.replaceAll( "\\s+" , "" );
+		
+		return "{\"statements\":[{\"statement\":\"MATCH (o:VerifyOTP{otp:{otp},number:{number}}) RETURN id(o)\",\"parameters\":{\"number\":\""+number+"\",\"otp\":\""+OTP+"\"}}]}";
+		
+	}
 	
 }
