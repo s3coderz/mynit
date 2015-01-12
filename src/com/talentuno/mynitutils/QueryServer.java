@@ -23,9 +23,10 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 	
 	public enum Action {
 		
-		CREATE_USER,
-		GET_USER,
-		REQUEST_OTP
+		CREATE_USER, // action to create a user in the Database
+		GET_USER, // action to get all profile information of a user from Database 
+		REQUEST_OTP, // action to request an OTP from server
+		VERIFY_OTP
 		
 	}
 
@@ -51,6 +52,10 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			
 		case REQUEST_OTP:
 			cypherQuery = User.requestOTP(params[0],params[1]);
+			break;
+			
+		case VERIFY_OTP:
+			cypherQuery = User.verifyOTP(params[0],params[1],params[2]);
 			break;
 			
 		default:
@@ -108,6 +113,10 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			break;
 			
 		case REQUEST_OTP:
+			caller.onSuccess("");
+			break;
+			
+		case VERIFY_OTP:
 			caller.onSuccess("");
 			break;
 			
