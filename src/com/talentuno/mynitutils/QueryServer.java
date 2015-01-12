@@ -19,51 +19,28 @@ import com.google.gson.JsonParser;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class QueryServer extends AsyncTask<Void, Void, String> {
+public class QueryServer extends AsyncTask<Object, Void, String> {
 	
 	public enum Action {
 		
 		CREATE_USER, // action to create a user in the Database
 		GET_USER, // action to get all profile information of a user from Database 
 		REQUEST_OTP, // action to request an OTP from server
-		VERIFY_OTP
+		VERIFY_OTP,
+		TEST_ACTION
 		
 	}
 
 	String cypherQuery = "";
 	ResultHandler caller;
-	Object[] params;
 	Action action;
+	int requestId;
+	int responseId;
 
-	public QueryServer(ResultHandler caller, Action action, String... params) {
+	public QueryServer(ResultHandler caller, Action action , int requestId ) {
 		this.caller = caller;
 		this.action = action;
-		this.params = params;
-		
-		switch( action ) {
-		
-		case CREATE_USER:
-			cypherQuery = User.createUser(params[0],params[1],params[2],params[3],params[4]);
-			break;
-			
-		case GET_USER:
-			cypherQuery = User.getUser(params[0]);
-			break;
-			
-		case REQUEST_OTP:
-			cypherQuery = User.requestOTP(params[0],params[1]);
-			break;
-			
-		case VERIFY_OTP:
-			cypherQuery = User.verifyOTP(params[0],params[1],params[2]);
-			break;
-			
-		default:
-			cypherQuery = "error:Action " + action + " is undefined";
-			break;
-			
-		}
-		
+		this.requestId = requestId;
 	}
 
 	@Override
@@ -72,7 +49,7 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 		if( cypherQuery.startsWith( "error:" ) ) {
 			
 			Log.d( "com.talentuno.mynit", cypherQuery );
-			caller.onFailure(cypherQuery);
+			caller.onFailure(cypherQuery, requestId, responseId);
 			return;
 			
 		}
@@ -83,7 +60,7 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			
 			String errMsg = "error:" + errors.get(0).getAsJsonObject().get("message").getAsString();
 			Log.d( "com.talentuno.mynit", errMsg );
-			caller.onFailure(errMsg);
+			caller.onFailure(errMsg, requestId, responseId);
 			return;
 			
 		}
@@ -92,7 +69,7 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			
 			String errMsg = "error:No data to show";
 			Log.d( "com.talentuno.mynit", errMsg );
-			caller.onFailure(errMsg);
+			caller.onFailure(errMsg, requestId, responseId);
 			return;
 			
 		}
@@ -100,7 +77,7 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 		switch( action ) {
 		
 		case CREATE_USER:
-			caller.onSuccess("");
+			caller.onSuccess("", requestId, responseId);
 			break;
 			
 		case GET_USER:
@@ -109,20 +86,20 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 			String phNumber = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("phNumber").getAsString();
 			String email = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("email").getAsString();
 			String dpId = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("dpId").getAsString();
-			caller.onSuccess( new User(name, uid, dpId, phNumber, email));
+			caller.onSuccess( new User(name, uid, dpId, phNumber, email), requestId, responseId);
 			break;
 			
 		case REQUEST_OTP:
-			caller.onSuccess("");
+			caller.onSuccess("", requestId, responseId);
 			break;
 			
 		case VERIFY_OTP:
-			caller.onSuccess("");
+			caller.onSuccess("", requestId, responseId);
 			break;
 			
 		default:
 			cypherQuery = "error:Action " + action + " is undefined";
-			caller.onFailure(cypherQuery);
+			caller.onFailure(cypherQuery, requestId, responseId);
 			break;
 			
 		}
@@ -130,7 +107,44 @@ public class QueryServer extends AsyncTask<Void, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(Void... params) {
+	protected String doInBackground( Object... params ) {
+		
+		responseId = (int) params[0];
+		
+		switch( action ) {
+		
+		case CREATE_USER:
+			String name = params[1].toString();
+			String uid = params[2].toString();
+			String dpId = params[3].toString();
+			String phNumber = params[4].toString();
+			String email = params[5].toString(); 
+			cypherQuery = User.createUser(name, uid, dpId, phNumber, email);
+			break;
+			
+		case GET_USER:
+			cypherQuery = User.getUser(params[1].toString());
+			break;
+			
+		case REQUEST_OTP:
+			String countryCode = params[1].toString();
+			phNumber = params[2].toString();
+			cypherQuery = User.requestOTP(countryCode, phNumber);
+			break;
+			
+		case VERIFY_OTP:
+			countryCode = params[1].toString();
+			phNumber = params[2].toString();
+			String OTP = params[3].toString();
+			cypherQuery = User.verifyOTP(countryCode, phNumber, OTP);
+			break;
+			
+		default:
+			cypherQuery = "error:Action " + action + " is undefined";
+			break;
+			
+		}
+		
 
 		if( cypherQuery.startsWith( "error:" ) )
 			return cypherQuery;
