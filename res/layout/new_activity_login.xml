@@ -37,6 +37,7 @@
                     android:src="@drawable/place_icon" />
 
                 <LinearLayout
+                    android:id="@+id/login_cc_ll"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
@@ -44,9 +45,11 @@
                     android:gravity="center_vertical" >
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/login_cc_number"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
+                        android:layout_weight="2.5"
                         android:gravity="center"
                         android:paddingLeft="8dp"
                         android:text="+91"
@@ -60,9 +63,12 @@
                         android:background="@android:color/black" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/login_cc_name"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="8"
+                        android:gravity="center_vertical"
                         android:text="India"
                         android:textColor="@android:color/black" >
                     </TextView>
@@ -82,18 +88,18 @@
                     android:src="@drawable/phone_icon" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/login_mobNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
                     android:background="@android:color/white"
                     android:ems="10"
+                    android:hint="Mobile Number"
                     android:inputType="phone"
                     android:maxLength="10"
                     android:paddingLeft="8dp"
-                    android:textSize="15sp"
-                    android:hint="Mobile Number"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
             </TableRow>
 
             <TableRow
@@ -110,7 +116,7 @@
                     android:visibility="invisible" />
 
                 <Button
-                    android:id="@+id/editText1"
+                    android:id="@+id/login_continueBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"

@@ -109,7 +109,7 @@ public class QueryServer extends AsyncTask<Object, Void, String> {
 	@Override
 	protected String doInBackground( Object... params ) {
 		
-		responseId = (int) params[0];
+		responseId = (Integer) params[0];
 		
 		switch( action ) {
 		
