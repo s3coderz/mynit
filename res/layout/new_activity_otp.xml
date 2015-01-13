@@ -32,15 +32,17 @@
                 android:gravity="center" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:src="@drawable/place_icon" />
 
                 <LinearLayout
                     android:id="@+id/login_cc_ll"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="8"
                     android:background="@android:color/white"
                     android:gravity="center_vertical" >
 
@@ -83,15 +85,17 @@
                 android:gravity="center" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:src="@drawable/phone_icon" />
 
                 <EditText
                     android:id="@+id/login_mobNumber"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="8"
                     android:background="@android:color/white"
                     android:ems="10"
                     android:hint="Mobile Number"
@@ -103,23 +107,61 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/phone_icon"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="8" >
+
+                    <ProgressBar
+                        android:id="@+id/login_pb"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/login_errorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Small Text"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
                 android:id="@+id/tableRow3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="7dp"
                 android:gravity="center" >
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:src="@drawable/phone_icon"
                     android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/login_continueBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="8"
                     android:background="@drawable/login_button_selector"
                     android:ems="10"
                     android:paddingLeft="8dp"
@@ -137,15 +179,18 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:src="@drawable/phone_icon"
                     android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/editText1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_weight="8"
                     android:ems="10"
+                    android:gravity="center"
                     android:text="You will receive a SMS with a confirmation code"
                     android:textColor="@android:color/black"
                     android:textSize="10sp" />

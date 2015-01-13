@@ -1,15 +1,11 @@
 package com.talentuno.activity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -21,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -30,21 +27,25 @@ import com.talentuno.mynitutils.QueryServer;
 import com.talentuno.mynitutils.QueryServer.Action;
 import com.talentuno.mynitutils.ResultHandler;
 
-public class LoginActivity extends Activity implements OnClickListener,
+public class OTPActivity extends Activity implements OnClickListener,
 		ResultHandler {
 	EditText mobNumber;
-	TextView cc_code, cc_name;
+	TextView cc_code, cc_name, errorText;
+
+	ProgressBar pb;
 
 	ListPopupWindow listPopupWindow;
 	LinearLayout ll_cc;
 	List<HashMap<String, String>> countryData;
+
+	Button continueBtn;
 
 	public final int REQUEST_ID = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.new_activity_login);
+		setContentView(R.layout.new_activity_otp);
 		init();
 
 		countryData = CountryUtil.prepareList(this);
@@ -89,11 +90,13 @@ public class LoginActivity extends Activity implements OnClickListener,
 	}
 
 	private void init() {
-		Button continueBtn = (Button) findViewById(R.id.login_continueBtn);
+		continueBtn = (Button) findViewById(R.id.login_continueBtn);
 		mobNumber = (EditText) findViewById(R.id.login_mobNumber);
 		cc_code = (TextView) findViewById(R.id.login_cc_number);
 		cc_name = (TextView) findViewById(R.id.login_cc_name);
 		ll_cc = (LinearLayout) findViewById(R.id.login_cc_ll);
+		pb = (ProgressBar) findViewById(R.id.login_pb);
+		errorText = (TextView) findViewById(R.id.login_errorText);
 
 		ll_cc.getViewTreeObserver().addOnPreDrawListener(
 				new OnPreDrawListener() {
@@ -129,7 +132,7 @@ public class LoginActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_continueBtn:
-			login();
+			requestOTP();
 			break;
 		case R.id.login_cc_ll:
 			listPopupWindow.show();
@@ -137,9 +140,10 @@ public class LoginActivity extends Activity implements OnClickListener,
 		}
 	}
 
-	private void login() {
+	private void requestOTP() {
 		if (mobNumber.getText() == null)
 			return;
+		showProgress(true);
 		String mobNo = mobNumber.getText().toString();
 		String countryCode = cc_code.getText().toString();
 		QueryServer requestTask = new QueryServer(this, Action.REQUEST_OTP,
@@ -149,14 +153,33 @@ public class LoginActivity extends Activity implements OnClickListener,
 				+ mobNo);
 	}
 
+	private void showProgress(boolean show) {
+		if (show) {
+			pb.setVisibility(View.VISIBLE);
+			errorText.setVisibility(View.INVISIBLE);
+			errorText.setText("");
+		} else {
+			pb.setVisibility(View.INVISIBLE);
+		}
+		ll_cc.setEnabled(!show);
+		continueBtn.setEnabled(!show);
+		mobNumber.setEnabled(!show);
+
+	}
+
 	@Override
 	public void onSuccess(Object object, int requestId, int responseId) {
 		Log.i("", "requestOTP onSuccess");
+		showProgress(false);
+		
 	}
 
 	@Override
 	public void onFailure(String errMsg, int requestId, int responseId) {
 		Log.i("", "requestOTP onError : " + errMsg);
+		errorText.setVisibility(View.VISIBLE);
+		errorText.setText(errMsg);
+		showProgress(false);
 	}
 
 }
