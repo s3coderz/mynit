@@ -19,14 +19,15 @@ import com.google.gson.JsonParser;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class QueryServer extends AsyncTask<Object, Void, String> {
+public class QueryServer extends AsyncTask<String, Void, String> {
 	
 	public enum Action {
 		
 		CREATE_USER, // action to create a user in the Database
 		GET_USER, // action to get all profile information of a user from Database 
 		REQUEST_OTP, // action to request an OTP from server
-		VERIFY_OTP,
+		VERIFY_OTP, // action to verify OTP entered by user matches one on server
+		EDIT_USER,
 		TEST_ACTION
 		
 	}
@@ -37,10 +38,11 @@ public class QueryServer extends AsyncTask<Object, Void, String> {
 	int requestId;
 	int responseId;
 
-	public QueryServer(ResultHandler caller, Action action , int requestId ) {
+	public QueryServer(ResultHandler caller, Action action , int requestId , int responseId ) {
 		this.caller = caller;
 		this.action = action;
 		this.requestId = requestId;
+		this.responseId = responseId;
 	}
 
 	@Override
@@ -77,6 +79,9 @@ public class QueryServer extends AsyncTask<Object, Void, String> {
 		switch( action ) {
 		
 		case CREATE_USER:
+		case REQUEST_OTP:
+		case VERIFY_OTP:
+		case EDIT_USER:
 			caller.onSuccess("", requestId, responseId);
 			break;
 			
@@ -89,14 +94,6 @@ public class QueryServer extends AsyncTask<Object, Void, String> {
 			caller.onSuccess( new User(name, uid, dpId, phNumber, email), requestId, responseId);
 			break;
 			
-		case REQUEST_OTP:
-			caller.onSuccess("", requestId, responseId);
-			break;
-			
-		case VERIFY_OTP:
-			caller.onSuccess("", requestId, responseId);
-			break;
-			
 		default:
 			cypherQuery = "error:Action " + action + " is undefined";
 			caller.onFailure(cypherQuery, requestId, responseId);
@@ -107,36 +104,28 @@ public class QueryServer extends AsyncTask<Object, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground( Object... params ) {
-		
-		responseId = (int) params[0];
+	protected String doInBackground( String... params ) {
 		
 		switch( action ) {
 		
 		case CREATE_USER:
-			String name = params[1].toString();
-			String uid = params[2].toString();
-			String dpId = params[3].toString();
-			String phNumber = params[4].toString();
-			String email = params[5].toString(); 
-			cypherQuery = User.createUser(name, uid, dpId, phNumber, email);
+			cypherQuery = User.createUser(params[0],params[1],params[2],params[3],params[4]);
 			break;
 			
 		case GET_USER:
-			cypherQuery = User.getUser(params[1].toString());
+			cypherQuery = User.getUser(params[0]);
 			break;
 			
 		case REQUEST_OTP:
-			String countryCode = params[1].toString();
-			phNumber = params[2].toString();
-			cypherQuery = User.requestOTP(countryCode, phNumber);
+			cypherQuery = User.requestOTP(params[0],params[1]);
 			break;
 			
 		case VERIFY_OTP:
-			countryCode = params[1].toString();
-			phNumber = params[2].toString();
-			String OTP = params[3].toString();
-			cypherQuery = User.verifyOTP(countryCode, phNumber, OTP);
+			cypherQuery = User.verifyOTP(params[0],params[1],params[2]);
+			break;
+			
+		case EDIT_USER:
+			cypherQuery = User.editUser(params[0],params[1],params[2],params[3],params[4]);
 			break;
 			
 		default:
