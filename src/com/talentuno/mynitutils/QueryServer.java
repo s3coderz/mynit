@@ -84,13 +84,30 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		switch( action ) {
 		// on request OTP send false for OTP not required and true for OTP required
 		case CREATE_USER:
-		case REQUEST_OTP:
 		case VERIFY_OTP:
 		case EDIT_USER:
 		case CREATE_COMMENT:
 		case UPVOTE_COMMENT:
 		case DOWNVOTE_COMMENT:
 			caller.onSuccess("", requestId, responseId);
+			break;
+			
+		case REQUEST_OTP:
+			
+//			0 - new user, otp required
+//			1 - exiting user with same phnumber but different imei, otp required
+//			2 - existing user with same phnumber and imei, no otp required
+			
+			long count1 = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsLong();
+			long count2 = json.getAsJsonArray("results").get(1).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsLong();
+			
+			if( count1 == 0 )
+				caller.onSuccess(0, requestId, responseId);
+			if( count1 != 0 && count2 == 0 )
+				caller.onSuccess(1, requestId, responseId);
+			if( count1 != 0 && count2 != 0 )
+				caller.onSuccess(2, requestId, responseId);
+			
 			break;
 			
 		case GET_USER:

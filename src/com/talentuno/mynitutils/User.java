@@ -52,8 +52,7 @@ public class User {
 		number = number.replaceAll( "\\-" , "" );
 		number = number.replaceAll( "\\s+" , "" );
 		
-		//return "{\"statements\":[{\"statement\":\"CREATE (otp:PendingOTP{props}) RETURN id(otp)\",\"parameters\":{\"props\":{\"number\":\""+number+"\"}}}]}";
-		return "{\"statements\":[{\"statement\":\"MATCH (user:User{imei:{imei},phNumber:{phNumber}}) return user\",\"parameters\":{\"phNumber\":\""+phNumber+"\",\"imei\":\""+imei+"\"}}]}";
+		return "{\"statements\":[{\"statement\":\"MATCH (user:User{phNumber:{phNumber}}) return count(user)\",\"parameters\":{\"phNumber\":\""+number+"\"}},{\"statement\":\"MATCH (user:User{phNumber:{phNumber},imei:{imei}}) return count(user)\",\"parameters\":{\"phNumber\":\""+number+"\",\"imei\":\""+imei+"\"}},{\"statement\":\"MATCH (user:User{phNumber:{phNumber}}) SET user.otpSkip =  CASE user.imei WHEN {imei} THEN 'yes' ELSE 'no' END return user.otpSkip\",\"parameters\":{\"phNumber\":\""+number+"\",\"imei\":\""+imei+"\"}},{\"statement\":\"CREATE (otp:PendingOTP{props}) RETURN id(otp)\",\"parameters\":{\"props\":{\"number\":\""+number+"\"}}}]}";
 		
 	}
 
