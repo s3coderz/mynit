@@ -18,9 +18,9 @@
         android:theme="@style/MynitCustomActionBarTheme" >
         <activity
             android:name="com.talentuno.activity.OTPActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="mynit"
             android:screenOrientation="portrait"
-            android:label="mynit" >
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +31,10 @@
             android:name="com.talentuno.mynit.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name="com.talentuno.activity.CreateUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
         <activity
             android:name="com.talentuno.mynit.UnansweredSurveyActivity"
             android:label="@string/title_activity_unanswered_survey" >

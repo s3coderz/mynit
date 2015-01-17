@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +33,7 @@ public class OTPActivity extends Activity implements OnClickListener,
 	EditText mobNumber;
 	TextView cc_code, cc_name, errorText;
 
-	ProgressBar pb;
+	// ProgressBar pb;
 
 	ListPopupWindow listPopupWindow;
 	LinearLayout ll_cc;
@@ -90,13 +91,13 @@ public class OTPActivity extends Activity implements OnClickListener,
 	}
 
 	private void init() {
-		continueBtn = (Button) findViewById(R.id.login_continueBtn);
-		mobNumber = (EditText) findViewById(R.id.login_mobNumber);
-		cc_code = (TextView) findViewById(R.id.login_cc_number);
-		cc_name = (TextView) findViewById(R.id.login_cc_name);
-		ll_cc = (LinearLayout) findViewById(R.id.login_cc_ll);
-		pb = (ProgressBar) findViewById(R.id.login_pb);
-		errorText = (TextView) findViewById(R.id.login_errorText);
+		continueBtn = (Button) findViewById(R.id.otp_continueBtn);
+		mobNumber = (EditText) findViewById(R.id.otp_mobNumber);
+		cc_code = (TextView) findViewById(R.id.otp_cc_number);
+		cc_name = (TextView) findViewById(R.id.otp_cc_name);
+		ll_cc = (LinearLayout) findViewById(R.id.otp_cc_ll);
+		// pb = (ProgressBar) findViewById(R.id.otp_pb);
+		errorText = (TextView) findViewById(R.id.otp_errorText);
 
 		ll_cc.getViewTreeObserver().addOnPreDrawListener(
 				new OnPreDrawListener() {
@@ -131,10 +132,10 @@ public class OTPActivity extends Activity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.login_continueBtn:
+		case R.id.otp_continueBtn:
 			requestOTP();
 			break;
-		case R.id.login_cc_ll:
+		case R.id.otp_cc_ll:
 			listPopupWindow.show();
 			break;
 		}
@@ -143,35 +144,49 @@ public class OTPActivity extends Activity implements OnClickListener,
 	private void requestOTP() {
 		if (mobNumber.getText() == null)
 			return;
-		showProgress(true);
 		String mobNo = mobNumber.getText().toString();
+		if (mobNo.length() < 1) {
+			errorText.setVisibility(View.VISIBLE);
+			errorText.setText(getResources().getString(
+					R.string.OTP_emptyTextError));
+			return;
+		}
+		showProgress(true);
 		String countryCode = cc_code.getText().toString();
 		QueryServer requestTask = new QueryServer(this, Action.REQUEST_OTP,
-				REQUEST_ID);
-		requestTask.execute(0, countryCode, mobNo);
+				REQUEST_ID, 0);
+		requestTask.execute(countryCode, mobNo);
 		Log.i("", "requesting OTP for cc : " + countryCode + " number : "
 				+ mobNo);
 	}
 
 	private void showProgress(boolean show) {
 		if (show) {
-			pb.setVisibility(View.VISIBLE);
+			// pb.setVisibility(View.VISIBLE);
 			errorText.setVisibility(View.INVISIBLE);
 			errorText.setText("");
 		} else {
-			pb.setVisibility(View.INVISIBLE);
+			// pb.setVisibility(View.INVISIBLE);
 		}
 		ll_cc.setEnabled(!show);
 		continueBtn.setEnabled(!show);
 		mobNumber.setEnabled(!show);
-
 	}
+
+	public static final String INTENT_EXTRA_COUTNRY_CODE = "countryCode";
+	public static final String INTENT_EXTRA_PHONE_NUMBER = "phoneNumber";
 
 	@Override
 	public void onSuccess(Object object, int requestId, int responseId) {
 		Log.i("", "requestOTP onSuccess");
 		showProgress(false);
-		
+		Intent createUserIntent = new Intent(this, CreateUserActivity.class);
+		createUserIntent.putExtra(INTENT_EXTRA_COUTNRY_CODE, cc_code.getText()
+				.toString());
+		createUserIntent.putExtra(INTENT_EXTRA_PHONE_NUMBER, mobNumber
+				.getText().toString());
+		startActivity(createUserIntent);
+		this.finish();
 	}
 
 	@Override

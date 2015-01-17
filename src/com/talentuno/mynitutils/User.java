@@ -25,12 +25,21 @@ public class User {
 
 	public static String createUser( String name, String uid, String dpId, String phNumber, String email ) {
 		
+		if( uid == null ) return "error:uid cannot be null";
 		return "{\"statements\":[{\"statement\":\"CREATE (user:User{props}) RETURN user.uid\",\"parameters\":{\"props\":{\"name\":\""+name+"\",\"uid\":\""+uid+"\",\"phNumber\":\""+phNumber+"\",\"dpId\":\""+dpId+"\",\"email\":\""+email+"\"}}}]}";
+		
+	}
+
+	public static String editUser( String name, String uid, String dpId, String phNumber, String email ) {
+		
+		if( uid == null ) return "error:uid cannot be null";
+		return "{\"statements\":[{\"statement\":\"MATCH (user:User{uid:{uid}}) SET user.name={name},user.dpId={dpId},user.phNumber={phNumber},user.email={email} RETURN user.uid\",\"parameters\":{\"name\":\""+name+"\",\"uid\":\""+uid+"\",\"phNumber\":\""+phNumber+"\",\"dpId\":\""+dpId+"\",\"email\":\""+email+"\"}}]}";
 		
 	}
 
 	public static  String getUser( String uid ) {
 		
+		if( uid == null ) return "error:uid cannot be null";
 		return "{\"statements\":[{\"statement\":\"MATCH (user:User{uid:{uid}}) RETURN user\",\"parameters\":{\"uid\":\""+uid+"\"}}]}";
 		
 	}

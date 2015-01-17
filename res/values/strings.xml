@@ -39,6 +39,19 @@
     <string name="title_activity_contacts">Contacts</string>
     <string name="title_activity_mynhome">MYN Home</string>
 
+    <!-- Vivek -->
+    <string name="OTP_Info">You will receive a SMS with a confirmation code</string>
+    <string name="OTP_mob_hint">Mobile Number</string>
+    <string name="OTP_btn_continue">CONTINUE</string>
+    <string name="OTP_emptyTextError">"Please enter your phone number to continue"</string>
+    <string name="register_Info">An access code has been sent to you via SMS</string>
+    <string name="register_OTP_Hint">Enter your access code</string>
+    <string name="register_name_Hint">Enter your Name</string>
+    <string name="register_handle_Hint">Enter your Handle</string>
+    <string name="register_OTP_success">OTP Verification Success</string>
+    <string name="verify_OTP_emptyTextError">"Please enter the OTP you received via SMS"</string>
+    <string name="register_User_emptyTextError">"Please enter a name to continue"</string>
+
     <string-array name="CountryCodes">
         <item>93,AF</item>
         <item>355,AL</item>

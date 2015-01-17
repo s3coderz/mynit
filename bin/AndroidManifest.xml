@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="13"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,10 +17,10 @@
         android:label="@string/app_name"
         android:theme="@style/MynitCustomActionBarTheme" >
         <activity
-            android:name="com.talentuno.activity.LoginActivity"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:name="com.talentuno.activity.OTPActivity"
+            android:label="mynit"
             android:screenOrientation="portrait"
-            android:label="mynit" >
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +31,10 @@
             android:name="com.talentuno.mynit.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name="com.talentuno.activity.CreateUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
         <activity
             android:name="com.talentuno.mynit.UnansweredSurveyActivity"
             android:label="@string/title_activity_unanswered_survey" >

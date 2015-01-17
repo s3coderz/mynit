@@ -5,197 +5,200 @@
     android:orientation="vertical"
     android:weightSum="10" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp" >
+        android:layout_weight="2.5" >
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/logo" />
+    </RelativeLayout>
 
-        <TableLayout
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center" >
 
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center" >
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/place_icon" />
-
-                <LinearLayout
-                    android:id="@+id/login_cc_ll"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="8"
-                    android:background="@android:color/white"
-                    android:gravity="center_vertical" >
-
-                    <TextView
-                        android:id="@+id/login_cc_number"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="2.5"
-                        android:gravity="center"
-                        android:paddingLeft="8dp"
-                        android:text="+91"
-                        android:textColor="@android:color/black" >
-                    </TextView>
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
-                        android:background="@android:color/black" />
-
-                    <TextView
-                        android:id="@+id/login_cc_name"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="8"
-                        android:gravity="center_vertical"
-                        android:text="India"
-                        android:textColor="@android:color/black" >
-                    </TextView>
-                </LinearLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center" >
+                android:layout_weight="1"
+                android:src="@drawable/place_icon" />
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/phone_icon" />
-
-                <EditText
-                    android:id="@+id/login_mobNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="8"
-                    android:background="@android:color/white"
-                    android:ems="10"
-                    android:hint="Mobile Number"
-                    android:inputType="phone"
-                    android:maxLength="10"
-                    android:paddingLeft="8dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/phone_icon"
-                    android:visibility="invisible" />
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="8" >
-
-                    <ProgressBar
-                        android:id="@+id/login_pb"
-                        style="?android:attr/progressBarStyleSmall"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible" />
-
-                    <TextView
-                        android:id="@+id/login_errorText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Small Text"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:visibility="invisible" />
-                </RelativeLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:gravity="center" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/phone_icon"
-                    android:visibility="invisible" />
-
-                <Button
-                    android:id="@+id/login_continueBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="8"
-                    android:background="@drawable/login_button_selector"
-                    android:ems="10"
-                    android:paddingLeft="8dp"
-                    android:text="CONTINUE"
-                    android:textColor="@android:color/white" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/phone_icon"
-                    android:visibility="invisible" />
+            <LinearLayout
+                android:id="@+id/otp_cc_ll"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="8"
+                android:background="@android:color/white"
+                android:gravity="center_vertical" >
 
                 <TextView
-                    android:id="@+id/editText1"
+                    android:id="@+id/otp_cc_number"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
-                    android:layout_weight="8"
-                    android:ems="10"
+                    android:layout_weight="2.5"
                     android:gravity="center"
-                    android:text="You will receive a SMS with a confirmation code"
+                    android:paddingLeft="8dp"
+                    android:text=""
+                    android:textColor="@android:color/black" >
+                </TextView>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/otp_cc_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="8"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@android:color/black" >
+                </TextView>
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/phone_icon" />
+
+            <EditText
+                android:id="@+id/otp_mobNumber"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="8"
+                android:background="@android:color/white"
+                android:ems="10"
+                android:hint="@string/OTP_mob_hint"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:paddingLeft="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/phone_icon"
+                android:visibility="invisible" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="8" >
+
+                <ProgressBar
+                    android:id="@+id/otp_pb"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/otp_errorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="2"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@android:color/black"
-                    android:textSize="10sp" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:gravity="center" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/phone_icon"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/otp_continueBtn"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="8"
+                android:background="@drawable/red_button_selector"
+                android:ems="10"
+                android:paddingLeft="8dp"
+                android:text="@string/OTP_btn_continue"
+                android:textColor="@android:color/white" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/phone_icon"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="@string/OTP_Info"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
