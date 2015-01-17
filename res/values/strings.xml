@@ -51,6 +51,8 @@
     <string name="register_OTP_success">OTP Verification Success</string>
     <string name="verify_OTP_emptyTextError">"Please enter the OTP you received via SMS"</string>
     <string name="register_User_emptyTextError">"Please enter a name to continue"</string>
+    <string name="drawer_open">""</string>
+    <string name="drawer_close">""</string>
 
     <string-array name="CountryCodes">
         <item>93,AF</item>

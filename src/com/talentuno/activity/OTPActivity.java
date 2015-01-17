@@ -18,13 +18,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
-import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.talentuno.mynit.R;
 import com.talentuno.mynitutils.CountryUtil;
 import com.talentuno.mynitutils.QueryServer;
+import com.talentuno.mynitutils.Utils;
 import com.talentuno.mynitutils.QueryServer.Action;
 import com.talentuno.mynitutils.ResultHandler;
 
@@ -155,7 +155,7 @@ public class OTPActivity extends Activity implements OnClickListener,
 		String countryCode = cc_code.getText().toString();
 		QueryServer requestTask = new QueryServer(this, Action.REQUEST_OTP,
 				REQUEST_ID, 0);
-		requestTask.execute(countryCode, mobNo);
+		requestTask.execute(countryCode, mobNo, Utils.getImeiNumber(this));
 		Log.i("", "requesting OTP for cc : " + countryCode + " number : "
 				+ mobNo);
 	}

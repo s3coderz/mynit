@@ -1,6 +1,7 @@
 package com.talentuno.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.talentuno.mynit.R;
 import com.talentuno.mynitutils.QueryServer;
 import com.talentuno.mynitutils.ResultHandler;
+import com.talentuno.mynitutils.Utils;
 import com.talentuno.mynitutils.QueryServer.Action;
 
 public class CreateUserActivity extends Activity implements OnClickListener,
@@ -78,7 +80,8 @@ public class CreateUserActivity extends Activity implements OnClickListener,
 		showUserCreateProgress(true);
 		query_registerUser = new QueryServer(this, Action.CREATE_USER,
 				REQUEST_ID_REGISTER_USER, 0);
-		query_registerUser.execute(name, phoneNumber, null, phoneNumber, null);
+		query_registerUser.execute(name, phoneNumber, null, phoneNumber, null,
+				Utils.getImeiNumber(this));
 	}
 
 	private void showOTPProgress(boolean show) {
@@ -124,7 +127,9 @@ public class CreateUserActivity extends Activity implements OnClickListener,
 		} else if (requestId == REQUEST_ID_REGISTER_USER) {
 			Log.i("", "register user OTP : success");
 			showUserCreateProgress(false);
-
+			Intent homeIntent = new Intent(this, HomeActivity.class);
+			startActivity(homeIntent);
+			finish();
 		}
 	}
 
