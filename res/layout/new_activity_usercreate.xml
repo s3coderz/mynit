@@ -1,0 +1,129 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:weightSum="10" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:gravity="bottom" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:weightSum="2" >
+
+        <LinearLayout
+            android:id="@+id/register_otp_ll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
+
+            <TextView
+                android:id="@+id/register_otp_errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/register_Info"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+
+            <EditText
+                android:id="@+id/register_OTPText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="17dp"
+                android:background="@android:color/white"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/register_OTP_Hint"
+                android:inputType="number"
+                android:maxLength="4"
+                android:paddingLeft="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/register_otp_continueBtn"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/red_button_selector"
+                android:text="@string/OTP_btn_continue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/register_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/button_red_disabled" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
+
+            <TextView
+                android:id="@+id/register_name_errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/black"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/register_UserName"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="17dp"
+                android:background="@android:color/white"
+                android:ems="10"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="@string/register_name_Hint"
+                android:maxLength="10"
+                android:paddingLeft="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/register_createuser_continueBtn"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/red_button_selector"
+                android:enabled="false"
+                android:text="@string/OTP_btn_continue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
