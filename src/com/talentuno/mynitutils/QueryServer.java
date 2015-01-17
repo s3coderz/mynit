@@ -28,6 +28,11 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		REQUEST_OTP, // action to request an OTP from server
 		VERIFY_OTP, // action to verify OTP entered by user matches one on server
 		EDIT_USER,
+		CREATE_COMMENT,
+		GET_COMMENT,
+		GET_COMMENTS,
+		UPVOTE_COMMENT,
+		DOWNVOTE_COMMENT,
 		TEST_ACTION
 		
 	}
@@ -77,12 +82,32 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		}
 		
 		switch( action ) {
-		
+		// on request OTP send false for OTP not required and true for OTP required
 		case CREATE_USER:
-		case REQUEST_OTP:
 		case VERIFY_OTP:
 		case EDIT_USER:
+		case CREATE_COMMENT:
+		case UPVOTE_COMMENT:
+		case DOWNVOTE_COMMENT:
 			caller.onSuccess("", requestId, responseId);
+			break;
+			
+		case REQUEST_OTP:
+			
+//			0 - new user, otp required
+//			1 - exiting user with same phnumber but different imei, otp required
+//			2 - existing user with same phnumber and imei, no otp required
+			
+			long count1 = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsLong();
+			long count2 = json.getAsJsonArray("results").get(1).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsLong();
+			
+			if( count1 == 0 )
+				caller.onSuccess(0, requestId, responseId);
+			if( count1 != 0 && count2 == 0 )
+				caller.onSuccess(1, requestId, responseId);
+			if( count1 != 0 && count2 != 0 )
+				caller.onSuccess(2, requestId, responseId);
+			
 			break;
 			
 		case GET_USER:
@@ -91,7 +116,24 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			String phNumber = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("phNumber").getAsString();
 			String email = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("email").getAsString();
 			String dpId = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("dpId").getAsString();
-			caller.onSuccess( new User(name, uid, dpId, phNumber, email), requestId, responseId);
+			String imei = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("imei").getAsString();
+			caller.onSuccess( new User(name, uid, dpId, phNumber, email, imei), requestId, responseId);
+			break;
+			
+		case GET_COMMENT:
+			name = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("name").getAsString();
+			uid = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("uid").getAsString();
+			String text = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("text").getAsString();
+			boolean enabled = Boolean.parseBoolean( json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("enabled").getAsString() );
+			long date = Long.parseLong(json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("date").getAsString());
+			String commentId = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsJsonObject().get("commentId").getAsString();
+			long upvote = Long.parseLong(json.getAsJsonArray("results").get(1).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsString());
+			long downvote = Long.parseLong(json.getAsJsonArray("results").get(2).getAsJsonObject().getAsJsonArray( "data" ).get(0).getAsJsonObject().getAsJsonArray( "row" ).get(0).getAsString());
+			caller.onSuccess( new Comment(text, name, uid, enabled, date, upvote, downvote, commentId), requestId, responseId);
+			break;
+			
+		case GET_COMMENTS:
+			caller.onSuccess(json, requestId, responseId);
 			break;
 			
 		default:
@@ -109,7 +151,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		switch( action ) {
 		
 		case CREATE_USER:
-			cypherQuery = User.createUser(params[0],params[1],params[2],params[3],params[4]);
+			cypherQuery = User.createUser(params[0],params[1],params[2],params[3],params[4],params[5]);
 			break;
 			
 		case GET_USER:
@@ -117,7 +159,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			break;
 			
 		case REQUEST_OTP:
-			cypherQuery = User.requestOTP(params[0],params[1]);
+			cypherQuery = User.requestOTP(params[0],params[1],params[2]);
 			break;
 			
 		case VERIFY_OTP:
@@ -125,8 +167,28 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			break;
 			
 		case EDIT_USER:
-			cypherQuery = User.editUser(params[0],params[1],params[2],params[3],params[4]);
+			cypherQuery = User.editUser(params[0],params[1],params[2],params[3],params[4],params[5]);
 			break;
+			
+		case CREATE_COMMENT:
+			cypherQuery = Comment.createComment(params[0],params[1],params[2],params[3]);
+			break;
+			
+		case GET_COMMENT:
+			cypherQuery = Comment.getComment(params[0]);
+			break;
+			
+		case GET_COMMENTS:
+			cypherQuery = Comment.getComments(params);
+			break;
+			
+		case UPVOTE_COMMENT:
+			cypherQuery = Comment.upVote(params[0],params[1]);
+			break;
+			
+		case DOWNVOTE_COMMENT:
+			cypherQuery = Comment.downVote(params[0],params[1]);
+			break;	
 			
 		default:
 			cypherQuery = "error:Action " + action + " is undefined";
