@@ -56,7 +56,7 @@ public class HomeActivity extends Activity implements OnItemClickListener {
 		R.string.drawer_close /* "close drawer" description for accessibility */
 		) {
 			public void onDrawerClosed(View view) {
-				// getActionBar().setTitle(mTitle);
+//				 getActionBar().setTitle(selectedTitle);
 				// invalidateOptionsMenu(); // creates call to
 				// onPrepareOptionsMenu()
 			}
@@ -105,15 +105,18 @@ public class HomeActivity extends Activity implements OnItemClickListener {
 		licenceAgreementFragment = new LicenceAgreementFragment();
 	}
 
+	String selectedTitle = "";
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
 		if (selectedPos == position)
 			return;
+		selectedTitle = mTitles[position];
+		getActionBar().setTitle(selectedTitle);
+		loadFagment(position);
 		mDrawerList.setItemChecked(position, true);
 		// setTitle(mPlanetTitles[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
-		loadFagment(position);
 
 	}
 
