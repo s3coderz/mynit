@@ -3,6 +3,8 @@ package com.talentuno.mynitutils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -38,6 +40,22 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 	Action action;
 	int requestId;
 	int responseId;
+
+	public boolean isNetworkAvailable() {
+	
+		try {
+            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://54.148.201.55:7474/db/data/").openConnection());
+            urlc.setRequestProperty("User-Agent", "Test");
+            urlc.setRequestProperty("Connection", "close");
+            urlc.setConnectTimeout(1500); 
+            urlc.connect();
+            return (urlc.getResponseCode() == 200);
+        } catch (IOException e) {
+            Log.d("com.talentuno.mynit", "error:Failed to connect to server");
+    		return false;
+        }
+		
+	}
 
 	public QueryServer(ResultHandler caller, Action action, int requestId,
 			int responseId) {
@@ -198,6 +216,9 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
+		
+		if( ! isNetworkAvailable() )
+			return ("error:Failed to connect to server");
 
 		switch (action) {
 
