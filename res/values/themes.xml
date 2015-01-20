@@ -10,6 +10,12 @@
     <!-- ActionBar styles -->
     <style name="MynitActionBar"
            parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#D93333</item>
+             <!--  <item name="android:background">#D93333</item> -->
+        <item name="android:background">@drawable/header_bar</item>
+        <item name="android:titleTextStyle">@style/MynitActionBar.Text</item>
+    </style>
+
+    <style name="MynitActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

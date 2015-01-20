@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources >
+<resources>
+
     <color name="button_red">#dc4a33</color>
     <color name="button_red_hover">#c94a29</color>
     <color name="button_red_disabled">#C4CBB7</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+
 </resources>

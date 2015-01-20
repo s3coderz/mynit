@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="menu_create_poll">Create Poll</string>
+    <string name="menu_group">Groups</string>
     <string name="app_name">mynit</string>
     <string name="hello_world">Hello world!</string>
     <string name="mynit_with_your_number">mynit with your number</string>
@@ -14,7 +16,7 @@
     <string name="confirm_your_number">Confirm Your Number</string>
     <string name="enter_OTP">We sent you a sms pin\nEnter Below</string>
     <string name="invalid_OTP">The OTP entered by you does not match the one we sent you</string>
-    <string name="title_activity_home">Home</string>
+    <string name="title_activity_home">HOME</string>
     <string name="click_share_opinion">Click to Share your Opinion</string>
     <string name="vote_anonymous">(Your Vote is Anonymous)</string>
     <string name="survey_enabled">survey is enabled</string>

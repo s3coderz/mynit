@@ -1,11 +1,15 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.talentuno.mynit.MYNHomeActivity" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"/>
+        android:id="@+id/menu_create"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/create_icon"
+        android:title="@string/menu_create_poll"/>
 
+    <item
+        android:id="@+id/menu_group"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/group_icon"
+        android:title="@string/menu_group"/>
+    
 </menu>
