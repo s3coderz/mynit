@@ -31,7 +31,8 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		REQUEST_OTP, // action to request an OTP from server
 		VERIFY_OTP, // action to verify OTP entered by user matches one on
 					// server
-		EDIT_USER, CREATE_COMMENT, GET_COMMENT, GET_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, TEST_ACTION
+		EDIT_USER, CREATE_COMMENT, GET_COMMENT, GET_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, TEST_ACTION, CREATE_SURVEY,
+		GET_SURVEY, SAY_YES, SAY_NO, SAY_MAYBE
 
 	}
 
@@ -108,6 +109,10 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		case CREATE_COMMENT:
 		case UPVOTE_COMMENT:
 		case DOWNVOTE_COMMENT:
+		case CREATE_SURVEY:
+		case SAY_YES:
+		case SAY_NO:
+		case SAY_MAYBE:
 			caller.onSuccess("", requestId, responseId);
 			break;
 
@@ -201,6 +206,56 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 					upvote, downvote, commentId), requestId, responseId);
 			break;
 
+		case GET_SURVEY:
+			/*
+	long yes;
+	long no;
+	long maybe;*/
+			name = json.getAsJsonArray("results").get(0).getAsJsonObject()
+					.getAsJsonArray("data").get(0).getAsJsonObject()
+					.getAsJsonArray("row").get(0).getAsJsonObject().get("name")
+					.getAsString();
+			uid = json.getAsJsonArray("results").get(0).getAsJsonObject()
+					.getAsJsonArray("data").get(0).getAsJsonObject()
+					.getAsJsonArray("row").get(0).getAsJsonObject().get("uid")
+					.getAsString();
+			text = json.getAsJsonArray("results").get(0)
+					.getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsJsonObject().get("text").getAsString();
+			enabled = Boolean.parseBoolean(json
+					.getAsJsonArray("results").get(0).getAsJsonObject()
+					.getAsJsonArray("data").get(0).getAsJsonObject()
+					.getAsJsonArray("row").get(0).getAsJsonObject()
+					.get("enabled").getAsString());
+			boolean allowInvite = Boolean.parseBoolean(json
+					.getAsJsonArray("results").get(0).getAsJsonObject()
+					.getAsJsonArray("data").get(0).getAsJsonObject()
+					.getAsJsonArray("row").get(0).getAsJsonObject()
+					.get("allowInvite").getAsString());
+			date = Long.parseLong(json.getAsJsonArray("results").get(0)
+					.getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsJsonObject().get("date").getAsString());
+			String surveyId = json.getAsJsonArray("results").get(0)
+					.getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsJsonObject().get("surveyId").getAsString();
+			long yes = Long.parseLong(json.getAsJsonArray("results").get(1)
+					.getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsString());
+			long no = Long.parseLong(json.getAsJsonArray("results")
+					.get(2).getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsString());
+			long maybe = Long.parseLong(json.getAsJsonArray("results")
+					.get(3).getAsJsonObject().getAsJsonArray("data").get(0)
+					.getAsJsonObject().getAsJsonArray("row").get(0)
+					.getAsString());
+			caller.onSuccess(new Survey(surveyId, text, uid, name, enabled, allowInvite, date, yes, no, maybe), requestId, responseId);
+			break;
+
 		case GET_COMMENTS:
 			caller.onSuccess(json, requestId, responseId);
 			break;
@@ -264,7 +319,27 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		case DOWNVOTE_COMMENT:
 			cypherQuery = Comment.downVote(params[0], params[1]);
 			break;
+			
+		case CREATE_SURVEY:
+			cypherQuery = Survey.createSurvey(params[0], params[1],params[2], Boolean.parseBoolean(params[3]));
+			break;
 
+		case GET_SURVEY:
+			cypherQuery = Survey.getSurvey(params[0]);
+			break;
+			
+		case SAY_YES:
+			cypherQuery = Survey.sayYes(params[0], params[1]);
+			break;
+			
+		case SAY_NO:
+			cypherQuery = Survey.sayNo(params[0], params[1]);
+			break;
+			
+		case SAY_MAYBE:
+			cypherQuery = Survey.sayMaybe(params[0], params[1]);
+			break;
+			
 		default:
 			cypherQuery = "error:Action " + action + " is undefined";
 			break;

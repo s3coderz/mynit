@@ -10,18 +10,14 @@ public class Survey {
 	String name;
 	boolean enabled;
 	boolean allowInvite;
-	Date date;
-
-	@Override
-	public String toString() {
-		return "Survey [surveyId=" + surveyId + ", text=" + text + ", uid="
-				+ uid + ", name=" + name + ", enabled=" + enabled
-				+ ", allowInvite=" + allowInvite + ", date=" + date + "]";
-	}
+	long date;
+	long yes;
+	long no;
+	long maybe;
 
 	public Survey(String surveyId, String text, String uid, String name,
-			boolean enabled, boolean allowInvite, Date date) {
-		super();
+			boolean enabled, boolean allowInvite, long date, long yes, long no,
+			long maybe) {
 		this.surveyId = surveyId;
 		this.text = text;
 		this.uid = uid;
@@ -29,48 +25,51 @@ public class Survey {
 		this.enabled = enabled;
 		this.allowInvite = allowInvite;
 		this.date = date;
+		this.yes = yes;
+		this.no = no;
+		this.maybe = maybe;
+	}
+
+	@Override
+	public String toString() {
+		return "Survey [surveyId=" + surveyId + ", text=" + text + ", uid="
+				+ uid + ", name=" + name + ", enabled=" + enabled
+				+ ", allowInvite=" + allowInvite + ", date=" + date + ", yes="
+				+ yes + ", no=" + no + ", maybe=" + maybe + "]";
 	}
 
 	public static String createSurvey( String text, String name, String uid , boolean allowInvite ) {
 
 		long now = new Date().getTime();		
-		return "{\"statements\":[{\"statement\":\"CREATE (survey:Survey{props})\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"name\":\""+name+"\",\"allowInvite\":\""+allowInvite+"\",\"enabled\":\"true\",\"date\":\""+now+"\",\"text\":\""+text+"\",\"surveyId\":\""+uid+"_"+now+"\"}}},{\"statement\":\"MATCH(survey:Survey{uid:{uid}}) MATCH(user:User{uid:{uid}}) CREATE UNIQUE (user)-[r:A_COMMENT]->(comment) RETURN id(r),id(comment)\",\"parameters\":{\"uid\":\""+uid+"\",\"commentId\":\""+uid+"_"+now+"\"}},{\"statement\":\"MATCH(comment:Comment{commentId:{commentId}}) MATCH(survey:Survey{surveyId:{surveyId}}) CREATE UNIQUE (survey)-[r:A_COMMENT]->(comment) RETURN id(r)\",\"parameters\" : {\"surveyId\" : \""+surveyId+"\",\"commentId\":\""+uid+"_"+now+"\"}}]}";
+		return "{\"statements\":[{\"statement\":\"CREATE (survey:Survey{props})\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"name\":\""+name+"\",\"allowInvite\":\""+allowInvite+"\",\"enabled\":\"true\",\"date\":\""+now+"\",\"text\":\""+text+"\",\"surveyId\":\""+uid+"_"+now+"\"}}},{\"statement\":\"MATCH(survey:Survey{surveyId:{surveyId}}) MATCH(user:User{uid:{uid}}) CREATE UNIQUE (user)-[r:A_SURVEY]->(survey) RETURN id(r),id(survey)\",\"parameters\":{\"uid\":\""+uid+"\",\"surveyId\":\""+uid+"_"+now+"\"}}]}";
 
 	}
 
-	public static String getComment(String commentId) {
+	public static String getSurvey(String surveyId) {
 
-		return "{\"statements\":[{\"statement\":\"MATCH (comment:Comment{commentId:{commentId}}) return comment\",\"parameters\":{\"commentId\":\""+commentId+"\"}},{\"statement\":\"MATCH (upvote:Upvote{commentId:{commentId}}) return count(upvote)\",\"parameters\":{\"commentId\":\""+commentId+"\"}},{\"statement\":\"MATCH (downvote:Downvote{commentId:{commentId}}) return count(downvote)\",\"parameters\":{\"commentId\":\""+commentId+"\"}}]}";
-
-	}
-
-	public static String getComments(String[] commentIds) {
-
-		String part1 = "{comment0}";
-		String part2 = "\"comment0\":\""+commentIds[0]+"\"";
-		
-		for( int i = 1 ; i < commentIds.length ; i++ ) {
-			
-			part1 += ",{comment"+i+"}";
-			part2 += ",\"comment"+i+"\":\""+commentIds[i]+"\"";
-			
-		}
-		
-		return "{\"statements\":[{\"statement\":\"MATCH (comment:Comment) WHERE comment.commentId IN ["+part1+"] RETURN comment\",\"parameters\":{"+part2+"}}]}";
+		return "{\"statements\":[{\"statement\":\"MATCH (survey:Survey{surveyId:{surveyId}}) return survey\",\"parameters\":{\"surveyId\":\""+surveyId+"\"}},{\"statement\":\"MATCH (yes:Yes{surveyId:{surveyId}}) return count(yes)\",\"parameters\":{\"surveyId\":\""+surveyId+"\"}},{\"statement\":\"MATCH (no:No{surveyId:{surveyId}}) return count(no)\",\"parameters\":{\"surveyId\":\""+surveyId+"\"}},{\"statement\":\"MATCH (maybe:Maybe{surveyId:{surveyId}}) return count(maybe)\",\"parameters\":{\"surveyId\":\""+surveyId+"\"}}]}";
 
 	}
 	
-	public static String upVote( String uid, String commentId ) {
+	public static String sayYes( String uid, String surveyId ) {
 		
-		return "{\"statements\":[{\"statement\":\"MATCH (d:Downvote{voteId:{voteId}}) delete(d)\",\"parameters\":{\"voteId\":\""+uid+"_"+commentId+"\"}},{\"statement\":\"CREATE (u:Upvote{props}) return id(u)\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"commentId\":\""+commentId+"\",\"voteId\":\""+uid+"_"+commentId+"\"}}}]}";
-		
-	}
-	
-	public static String downVote( String uid, String commentId ) {
-		
-		return "{\"statements\":[{\"statement\":\"MATCH (u:Upvote{voteId:{voteId}}) delete(u)\",\"parameters\":{\"voteId\":\""+uid+"_"+commentId+"\"}},{\"statement\":\"CREATE (d:Downvote{props}) return id(d)\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"commentId\":\""+commentId+"\",\"voteId\":\""+uid+"_"+commentId+"\"}}}]}";
+		long now = new Date().getTime();		
+		return "{\"statements\":[{\"statement\":\"CREATE (yes:Yes{props})\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"surveyId\":\""+surveyId+"\",\"date\":\""+now+"\"}}},{\"statement\":\"MATCH (no:No{surveyId:{surveyId},uid:{uid}}) delete no\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}},{\"statement\":\"MATCH (maybe:Maybe{surveyId:{surveyId},uid:{uid}}) delete maybe\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}}]}";
 		
 	}
 	
+	public static String sayNo( String uid, String surveyId ) {
+		
+		long now = new Date().getTime();		
+		return "{\"statements\":[{\"statement\":\"CREATE (no:No{props})\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"surveyId\":\""+surveyId+"\",\"date\":\""+now+"\"}}},{\"statement\":\"MATCH (yes:Yes{surveyId:{surveyId},uid:{uid}}) delete yes\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}},{\"statement\":\"MATCH (maybe:Maybe{surveyId:{surveyId},uid:{uid}}) delete maybe\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}}]}";
+		
+	}
+	
+	public static String sayMaybe( String uid, String surveyId ) {
+		
+		long now = new Date().getTime();		
+		return "{\"statements\":[{\"statement\":\"CREATE (maybe:Maybe{props})\",\"parameters\":{\"props\":{\"uid\":\""+uid+"\",\"surveyId\":\""+surveyId+"\",\"date\":\""+now+"\"}}},{\"statement\":\"MATCH (yes:Yes{surveyId:{surveyId},uid:{uid}}) delete yes\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}},{\"statement\":\"MATCH (no:No{surveyId:{surveyId},uid:{uid}}) delete no\",\"parameters\":{\"surveyId\":\""+surveyId+"\",\"uid\":\""+uid+"\"}}]}";
+		
+	}
 
 }
