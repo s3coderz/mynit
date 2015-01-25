@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -257,7 +258,36 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			break;
 
 		case GET_COMMENTS:
-			caller.onSuccess(json, requestId, responseId);
+			ArrayList<Comment> comments = new ArrayList<Comment>();
+			JsonArray jsonArray = json.getAsJsonArray("results").get(0).getAsJsonObject().getAsJsonArray("data");
+			for( int i = 0 ; i < jsonArray.size() ; i++ ){
+				name = jsonArray.get(i).getAsJsonObject()
+						.getAsJsonArray("row").get(0).getAsJsonObject().get("name")
+						.getAsString();
+				uid = jsonArray.get(i).getAsJsonObject()
+						.getAsJsonArray("row").get(0).getAsJsonObject().get("uid")
+						.getAsString();
+				text = jsonArray.get(i)
+						.getAsJsonObject().getAsJsonArray("row").get(0)
+						.getAsJsonObject().get("text").getAsString();
+				enabled = Boolean.parseBoolean(jsonArray.get(i).getAsJsonObject()
+						.getAsJsonArray("row").get(0).getAsJsonObject()
+						.get("enabled").getAsString());
+				date = Long.parseLong(jsonArray.get(i)
+						.getAsJsonObject().getAsJsonArray("row").get(0)
+						.getAsJsonObject().get("date").getAsString());
+				commentId = jsonArray.get(i)
+						.getAsJsonObject().getAsJsonArray("row").get(0)
+						.getAsJsonObject().get("commentId").getAsString();
+				upvote = Long.parseLong(jsonArray.get(i)
+						.getAsJsonObject().getAsJsonArray("row").get(0)
+						.getAsString());
+				downvote = Long.parseLong(jsonArray.get(i)
+						.getAsJsonObject().getAsJsonArray("row").get(0)
+						.getAsString());
+				comments.add(new Comment(text, name, uid, enabled, date, upvote, downvote, commentId));
+			}
+			caller.onSuccess(comments, requestId, responseId);
 			break;
 
 		default:
@@ -309,7 +339,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			break;
 
 		case GET_COMMENTS:
-			cypherQuery = Comment.getComments(params);
+			cypherQuery = Survey.getComments(params[0]);
 			break;
 
 		case UPVOTE_COMMENT:

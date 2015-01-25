@@ -72,4 +72,10 @@ public class Survey {
 		
 	}
 
+	public static String getComments(String surveyId) {
+
+		return "{\"statements\":[{\"statement\":\"MATCH (survey:Survey{surveyId:{surveyId}}) MATCH (survey)-[r:A_COMMENT]->(comment:Comment) RETURN comment ORDER BY comment.date DESC LIMIT 10\",\"parameters\":{\"surveyId\":\""+surveyId+"\"}}]}";
+
+	}
+
 }
