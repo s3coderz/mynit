@@ -33,7 +33,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		VERIFY_OTP, // action to verify OTP entered by user matches one on
 					// server
 		EDIT_USER, CREATE_COMMENT, GET_COMMENT, GET_COMMENTS, UPVOTE_COMMENT, DOWNVOTE_COMMENT, TEST_ACTION, CREATE_SURVEY,
-		GET_SURVEY, SAY_YES, SAY_NO, SAY_MAYBE
+		GET_SURVEY, SAY_YES, SAY_NO, SAY_MAYBE, SET_GROUP
 
 	}
 
@@ -70,6 +70,14 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 
+		if( action == Action.VERIFY_OTP ) {
+			
+			Log.d("com.talentuno.mynit", "fake verification" );
+			caller.onSuccess("", requestId, responseId);
+			return;
+			
+		}
+		
 		if (cypherQuery.startsWith("error:")) {
 
 			Log.d("com.talentuno.mynit", cypherQuery);
@@ -114,6 +122,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 		case SAY_YES:
 		case SAY_NO:
 		case SAY_MAYBE:
+		case SET_GROUP:
 			caller.onSuccess("", requestId, responseId);
 			break;
 
@@ -368,6 +377,10 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			
 		case SAY_MAYBE:
 			cypherQuery = Survey.sayMaybe(params[0], params[1]);
+			break;
+			
+		case SET_GROUP:
+			cypherQuery = User.setGroup(params[0],params[1],params[2]);
 			break;
 			
 		default:

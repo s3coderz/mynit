@@ -1,5 +1,7 @@
 package com.talentuno.mynitutils;
 
+import java.util.Date;
+
 public class User {
 
 	String name;
@@ -28,6 +30,12 @@ public class User {
 		
 		if( uid == null ) return "error:uid cannot be null";
 		return "{\"statements\":[{\"statement\":\"CREATE (user:User{props}) RETURN user.uid\",\"parameters\":{\"props\":{\"name\":\""+name+"\",\"uid\":\""+uid+"\",\"phNumber\":\""+phNumber+"\",\"dpId\":\""+dpId+"\",\"email\":\""+email+"\",\"imei\":\""+imei+"\"}}}]}";
+		
+	}
+
+	public static String setGroup( String uid, String groupName, String numberList ) {
+		
+		return "{\"statements\":[{\"statement\":\"MERGE (group:Group{name:{name},uid:{uid}}) ON CREATE SET group.date = {date},group.numbers={numbers} ON MATCH SET group.numbers={numbers} RETURN id(group)\",\"parameters\":{\"uid\":\""+uid+"\",\"name\":\""+groupName+"\",\"numbers\":\""+numberList+"\",\"date\":\""+new Date().getTime()+"\"}}]}";
 		
 	}
 

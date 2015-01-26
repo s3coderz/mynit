@@ -38,6 +38,7 @@ The following text describes how to use the com.talentuno.mynitutils.QueryServer
 		SAY_YES - action to say yes to a survey
 		SAY_NO - action to say no to a survey
 		SAY_MAYBE - action to say maybe to a survey
+		SET_GROUP - action to create/edit a group on server
 10) The parameters passed to the execute method of a QueryServer object must be in the following order based on the ACTION type:
 		CREATE_USER - String name, String uid, String dpId, String phNumber, String email, String imei
 		GET_USER - String uid
@@ -53,3 +54,4 @@ The following text describes how to use the com.talentuno.mynitutils.QueryServer
 		SAY_YES - String uid, String surveyId
 		SAY_NO - String uid, String surveyId
 		SAY_MAYBE - String uid, String surveyId
+		SET_GROUP - String uid, String groupName, String numberList(comma separated numbers)
