@@ -63,6 +63,7 @@ public class User {
 		return "{\"statements\":[{\"statement\":\"MATCH (user:User{phNumber:{phNumber}}) return count(user)\",\"parameters\":{\"phNumber\":\""+number+"\"}},{\"statement\":\"MATCH (user:User{phNumber:{phNumber},imei:{imei}}) return count(user)\",\"parameters\":{\"phNumber\":\""+number+"\",\"imei\":\""+imei+"\"}},{\"statement\":\"MATCH (user:User{phNumber:{phNumber}}) SET user.otpSkip =  CASE user.imei WHEN {imei} THEN 'yes' ELSE 'no' END return user.otpSkip\",\"parameters\":{\"phNumber\":\""+number+"\",\"imei\":\""+imei+"\"}},{\"statement\":\"CREATE (otp:PendingOTP{props}) RETURN id(otp)\",\"parameters\":{\"props\":{\"number\":\""+number+"\"}}}]}";
 		
 	}
+	
 
 	public static  String verifyOTP( String countryCode , String phNumber , String OTP ) {
 		

@@ -55,3 +55,4 @@ The following text describes how to use the com.talentuno.mynitutils.QueryServer
 		SAY_NO - String uid, String surveyId
 		SAY_MAYBE - String uid, String surveyId
 		SET_GROUP - String uid, String groupName, String numberList(comma separated numbers)
+		

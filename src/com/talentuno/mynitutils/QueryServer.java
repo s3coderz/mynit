@@ -383,6 +383,7 @@ public class QueryServer extends AsyncTask<String, Void, String> {
 			cypherQuery = User.setGroup(params[0],params[1],params[2]);
 			break;
 			
+			
 		default:
 			cypherQuery = "error:Action " + action + " is undefined";
 			break;
